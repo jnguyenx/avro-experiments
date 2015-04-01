@@ -1,0 +1,20 @@
+@namespace("org.ga4gh.models")
+
+
+protocol Common {
+
+record CustomObject {
+  int inner = 3;
+}
+
+record Avrobject {
+  union {null, int} avroInt = 5;
+  int avroIntTwo = 5;
+  double avroDouble = 5.5;
+  boolean avroBoolean = true;
+  string avroString = "hello";
+  union {null, string} avroStringTwo = "hello";
+  union {null, CustomObject} customObject = null;
+}
+
+}
