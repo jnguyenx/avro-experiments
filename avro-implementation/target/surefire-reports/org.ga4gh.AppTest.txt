@@ -1,14 +1,14 @@
 -------------------------------------------------------------------------------
 Test set: org.ga4gh.AppTest
 -------------------------------------------------------------------------------
-Tests run: 3, Failures: 0, Errors: 2, Skipped: 0, Time elapsed: 0.233 sec <<< FAILURE!
-testAvroByteEncoder(org.ga4gh.AppTest)  Time elapsed: 0.006 sec  <<< ERROR!
+Tests run: 6, Failures: 0, Errors: 3, Skipped: 0, Time elapsed: 0.22 sec <<< FAILURE!
+testAvroByteEncoder(org.ga4gh.AppTest)  Time elapsed: 0.007 sec  <<< ERROR!
 java.lang.NullPointerException: null of string in field avroString of org.ga4gh.models.Avrobject
 	at org.apache.avro.generic.GenericDatumWriter.npe(GenericDatumWriter.java:93)
 	at org.apache.avro.generic.GenericDatumWriter.write(GenericDatumWriter.java:87)
 	at org.apache.avro.generic.GenericDatumWriter.write(GenericDatumWriter.java:58)
-	at org.ga4gh.AppTest.serializeToByteArray(AppTest.java:71)
-	at org.ga4gh.AppTest.testAvroByteEncoder(AppTest.java:50)
+	at org.ga4gh.AppTest.serializeToByteArray(AppTest.java:90)
+	at org.ga4gh.AppTest.testAvroByteEncoder(AppTest.java:53)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -42,13 +42,55 @@ Caused by: java.lang.NullPointerException
 	at org.apache.avro.generic.GenericDatumWriter.write(GenericDatumWriter.java:66)
 	... 28 more
 
-testAvroJsonEncoder(org.ga4gh.AppTest)  Time elapsed: 0.022 sec  <<< ERROR!
+testAvroJsonDecoderWithMissingFields(org.ga4gh.AppTest)  Time elapsed: 0.002 sec  <<< ERROR!
+org.apache.avro.AvroTypeException: Expected field name not found: avroInt
+	at org.apache.avro.io.JsonDecoder.doAction(JsonDecoder.java:477)
+	at org.apache.avro.io.parsing.Parser.advance(Parser.java:88)
+	at org.apache.avro.io.JsonDecoder.advance(JsonDecoder.java:139)
+	at org.apache.avro.io.JsonDecoder.readIndex(JsonDecoder.java:429)
+	at org.apache.avro.io.ResolvingDecoder.doAction(ResolvingDecoder.java:229)
+	at org.apache.avro.io.parsing.Parser.advance(Parser.java:88)
+	at org.apache.avro.io.ResolvingDecoder.readIndex(ResolvingDecoder.java:206)
+	at org.apache.avro.generic.GenericDatumReader.read(GenericDatumReader.java:155)
+	at org.apache.avro.generic.GenericDatumReader.readField(GenericDatumReader.java:193)
+	at org.apache.avro.generic.GenericDatumReader.readRecord(GenericDatumReader.java:183)
+	at org.apache.avro.generic.GenericDatumReader.read(GenericDatumReader.java:151)
+	at org.apache.avro.generic.GenericDatumReader.read(GenericDatumReader.java:142)
+	at org.ga4gh.AppTest.deserialize(AppTest.java:101)
+	at org.ga4gh.AppTest.testAvroJsonDecoderWithMissingFields(AppTest.java:69)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:497)
+	at junit.framework.TestCase.runTest(TestCase.java:176)
+	at junit.framework.TestCase.runBare(TestCase.java:141)
+	at junit.framework.TestResult$1.protect(TestResult.java:122)
+	at junit.framework.TestResult.runProtected(TestResult.java:142)
+	at junit.framework.TestResult.run(TestResult.java:125)
+	at junit.framework.TestCase.run(TestCase.java:129)
+	at junit.framework.TestSuite.runTest(TestSuite.java:252)
+	at junit.framework.TestSuite.run(TestSuite.java:247)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:86)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:252)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:141)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:112)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:497)
+	at org.apache.maven.surefire.util.ReflectionUtils.invokeMethodWithArray(ReflectionUtils.java:189)
+	at org.apache.maven.surefire.booter.ProviderFactory$ProviderProxy.invoke(ProviderFactory.java:165)
+	at org.apache.maven.surefire.booter.ProviderFactory.invokeProvider(ProviderFactory.java:85)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
+
+testAvroJsonEncoder(org.ga4gh.AppTest)  Time elapsed: 0.001 sec  <<< ERROR!
 java.lang.NullPointerException: null of string in field avroString of org.ga4gh.models.Avrobject
 	at org.apache.avro.generic.GenericDatumWriter.npe(GenericDatumWriter.java:93)
 	at org.apache.avro.generic.GenericDatumWriter.write(GenericDatumWriter.java:87)
 	at org.apache.avro.generic.GenericDatumWriter.write(GenericDatumWriter.java:58)
-	at org.ga4gh.AppTest.serialize(AppTest.java:59)
-	at org.ga4gh.AppTest.testAvroJsonEncoder(AppTest.java:45)
+	at org.ga4gh.AppTest.serialize(AppTest.java:78)
+	at org.ga4gh.AppTest.testAvroJsonEncoder(AppTest.java:48)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)

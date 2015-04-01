@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="3" failures="0" name="org.ga4gh.AppTest" time="0.205" errors="2" skipped="0">
+<testsuite tests="6" failures="0" name="org.ga4gh.AppTest" time="0.197" errors="3" skipped="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="/usr/lib/jvm/java-8-oracle/jre/lib/amd64"/>
     <property name="java.vm.version" value="25.40-b25"/>
     <property name="java.vm.vendor" value="Oracle Corporation"/>
-    <property name="maven.multiModuleProjectDirectory" value="/home/jnguyenxuan/workspace/avro-specs"/>
+    <property name="maven.multiModuleProjectDirectory" value="/home/jnguyenxuan/workspace/avro-experiments"/>
     <property name="java.vendor.url" value="http://java.oracle.com/"/>
     <property name="path.separator" value=":"/>
     <property name="guice.disable.misplaced.annotation.check" value="true"/>
@@ -15,7 +15,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="sun.os.patch.level" value="unknown"/>
     <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
-    <property name="user.dir" value="/home/jnguyenxuan/workspace/avro-specs"/>
+    <property name="user.dir" value="/home/jnguyenxuan/workspace/avro-experiments"/>
     <property name="java.runtime.version" value="1.8.0_40-b25"/>
     <property name="java.awt.graphicsenv" value="sun.awt.X11GraphicsEnvironment"/>
     <property name="java.endorsed.dirs" value="/usr/lib/jvm/java-8-oracle/jre/lib/endorsed"/>
@@ -42,7 +42,7 @@
     <property name="java.vm.specification.version" value="1.8"/>
     <property name="sun.arch.data.model" value="64"/>
     <property name="java.home" value="/usr/lib/jvm/java-8-oracle/jre"/>
-    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher clean package"/>
+    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher package"/>
     <property name="java.specification.vendor" value="Oracle Corporation"/>
     <property name="user.language" value="en"/>
     <property name="awt.toolkit" value="sun.awt.X11.XToolkit"/>
@@ -60,14 +60,14 @@
     <property name="sun.desktop" value="gnome"/>
     <property name="sun.cpu.isalist" value=""/>
   </properties>
-  <testcase classname="org.ga4gh.AppTest" name="testAvrobject" time="0.177"/>
-  <testcase classname="org.ga4gh.AppTest" name="testAvroByteEncoder" time="0.006">
+  <testcase classname="org.ga4gh.AppTest" name="testAvrobject" time="0.157"/>
+  <testcase classname="org.ga4gh.AppTest" name="testAvroByteEncoder" time="0.007">
     <error message="null of string in field avroString of org.ga4gh.models.Avrobject" type="java.lang.NullPointerException">java.lang.NullPointerException: null of string in field avroString of org.ga4gh.models.Avrobject
 	at org.apache.avro.generic.GenericDatumWriter.npe(GenericDatumWriter.java:93)
 	at org.apache.avro.generic.GenericDatumWriter.write(GenericDatumWriter.java:87)
 	at org.apache.avro.generic.GenericDatumWriter.write(GenericDatumWriter.java:58)
-	at org.ga4gh.AppTest.serializeToByteArray(AppTest.java:71)
-	at org.ga4gh.AppTest.testAvroByteEncoder(AppTest.java:50)
+	at org.ga4gh.AppTest.serializeToByteArray(AppTest.java:90)
+	at org.ga4gh.AppTest.testAvroByteEncoder(AppTest.java:53)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -102,13 +102,58 @@ Caused by: java.lang.NullPointerException
 	... 28 more
 </error>
   </testcase>
-  <testcase classname="org.ga4gh.AppTest" name="testAvroJsonEncoder" time="0.022">
+  <testcase classname="org.ga4gh.AppTest" name="testAvroJsonDecoder" time="0.015"/>
+  <testcase classname="org.ga4gh.AppTest" name="testAvroJsonDecoderWithMissingFields" time="0.002">
+    <error message="Expected field name not found: avroInt" type="org.apache.avro.AvroTypeException">org.apache.avro.AvroTypeException: Expected field name not found: avroInt
+	at org.apache.avro.io.JsonDecoder.doAction(JsonDecoder.java:477)
+	at org.apache.avro.io.parsing.Parser.advance(Parser.java:88)
+	at org.apache.avro.io.JsonDecoder.advance(JsonDecoder.java:139)
+	at org.apache.avro.io.JsonDecoder.readIndex(JsonDecoder.java:429)
+	at org.apache.avro.io.ResolvingDecoder.doAction(ResolvingDecoder.java:229)
+	at org.apache.avro.io.parsing.Parser.advance(Parser.java:88)
+	at org.apache.avro.io.ResolvingDecoder.readIndex(ResolvingDecoder.java:206)
+	at org.apache.avro.generic.GenericDatumReader.read(GenericDatumReader.java:155)
+	at org.apache.avro.generic.GenericDatumReader.readField(GenericDatumReader.java:193)
+	at org.apache.avro.generic.GenericDatumReader.readRecord(GenericDatumReader.java:183)
+	at org.apache.avro.generic.GenericDatumReader.read(GenericDatumReader.java:151)
+	at org.apache.avro.generic.GenericDatumReader.read(GenericDatumReader.java:142)
+	at org.ga4gh.AppTest.deserialize(AppTest.java:101)
+	at org.ga4gh.AppTest.testAvroJsonDecoderWithMissingFields(AppTest.java:69)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:497)
+	at junit.framework.TestCase.runTest(TestCase.java:176)
+	at junit.framework.TestCase.runBare(TestCase.java:141)
+	at junit.framework.TestResult$1.protect(TestResult.java:122)
+	at junit.framework.TestResult.runProtected(TestResult.java:142)
+	at junit.framework.TestResult.run(TestResult.java:125)
+	at junit.framework.TestCase.run(TestCase.java:129)
+	at junit.framework.TestSuite.runTest(TestSuite.java:252)
+	at junit.framework.TestSuite.run(TestSuite.java:247)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:86)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:252)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:141)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:112)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:497)
+	at org.apache.maven.surefire.util.ReflectionUtils.invokeMethodWithArray(ReflectionUtils.java:189)
+	at org.apache.maven.surefire.booter.ProviderFactory$ProviderProxy.invoke(ProviderFactory.java:165)
+	at org.apache.maven.surefire.booter.ProviderFactory.invokeProvider(ProviderFactory.java:85)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
+</error>
+  </testcase>
+  <testcase classname="org.ga4gh.AppTest" name="testAvroJsonEncoderOutput" time="0.015"/>
+  <testcase classname="org.ga4gh.AppTest" name="testAvroJsonEncoder" time="0.001">
     <error message="null of string in field avroString of org.ga4gh.models.Avrobject" type="java.lang.NullPointerException">java.lang.NullPointerException: null of string in field avroString of org.ga4gh.models.Avrobject
 	at org.apache.avro.generic.GenericDatumWriter.npe(GenericDatumWriter.java:93)
 	at org.apache.avro.generic.GenericDatumWriter.write(GenericDatumWriter.java:87)
 	at org.apache.avro.generic.GenericDatumWriter.write(GenericDatumWriter.java:58)
-	at org.ga4gh.AppTest.serialize(AppTest.java:59)
-	at org.ga4gh.AppTest.testAvroJsonEncoder(AppTest.java:45)
+	at org.ga4gh.AppTest.serialize(AppTest.java:78)
+	at org.ga4gh.AppTest.testAvroJsonEncoder(AppTest.java:48)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)

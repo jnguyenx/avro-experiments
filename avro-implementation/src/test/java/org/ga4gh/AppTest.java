@@ -9,8 +9,11 @@ import junit.framework.TestSuite;
 
 import org.apache.avro.io.BinaryEncoder;
 import org.apache.avro.io.DatumWriter;
+import org.apache.avro.io.DecoderFactory;
 import org.apache.avro.io.EncoderFactory;
+import org.apache.avro.io.JsonDecoder;
 import org.apache.avro.io.JsonEncoder;
+import org.apache.avro.specific.SpecificDatumReader;
 import org.apache.avro.specific.SpecificDatumWriter;
 import org.ga4gh.models.Avrobject;
 
@@ -50,6 +53,22 @@ public class AppTest extends TestCase {
 		serializeToByteArray(obj);
 	}
 
+	public void testAvroJsonEncoderOutput() throws IOException {
+		Avrobject obj = new Avrobject();
+		obj.setAvroString("test");
+		System.out.println(serialize(obj));
+	}
+	
+	public void testAvroJsonDecoder() throws IOException {
+		String json = "{\"avroInt\": null, \"avroIntTwo\": 0, \"avroDouble\": 0.0, \"avroBoolean\": false, \"avroString\": \"hello\", \"avroStringTwo\": null, \"customObject\": null}";
+		System.out.println(deserialize(json));
+	}
+
+	public void testAvroJsonDecoderWithMissingFields() throws IOException {
+		String json = "{\"avroIntTwo\": 0, \"avroDouble\": 0.0, \"avroBoolean\": false, \"avroString\": \"hello\", \"avroStringTwo\": null, \"customObject\": null}";
+		System.out.println(deserialize(json));
+	}
+
 	public String serialize(Avrobject item) throws IOException {
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
 		SpecificDatumWriter<Avrobject> datumWriter = new SpecificDatumWriter<Avrobject>(
@@ -72,5 +91,13 @@ public class AppTest extends TestCase {
 		encoder.flush();
 		out.close();
 		return out.toByteArray();
+	}
+
+	public Avrobject deserialize(String input) throws IOException {
+		SpecificDatumReader<Avrobject> datumReader = new SpecificDatumReader<Avrobject>(
+				Avrobject.getClassSchema());
+		JsonDecoder decoder = DecoderFactory.get().jsonDecoder(
+				Avrobject.getClassSchema(), input);
+		return datumReader.read(null, decoder);
 	}
 }
